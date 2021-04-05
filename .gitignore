@@ -1,0 +1,12 @@
+.DS_Store
+.idea/
+
+/tmp_spoons/
+
+/Spoons/*
+!/Spoons/HoldToQuit.spoon/
+!/Spoons/Seal.spoon/
+
+config.lua
+
+pasteboard_history.json
