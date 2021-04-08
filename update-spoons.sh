@@ -8,7 +8,9 @@ git clone https://github.com/Hammerspoon/Spoons.git tmp_spoons && \
 
 # Apply patches.
 # @TODO Remove if merged.
-git -C $PWD/tmp_spoons/ apply -v ../patches/seal-pr-221.patch && \
+git -C $PWD/tmp_spoons/ apply -v ../patches/seal-pr-226.patch && \
+git -C $PWD/tmp_spoons/ apply -v ../patches/seal-pr-227.patch && \
+git -C $PWD/tmp_spoons/ apply -v ../patches/seal-pr-231.patch && \
 
 # Clean up and copy the source files.
 rm -rf Spoons/* && \

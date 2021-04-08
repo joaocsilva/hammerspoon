@@ -1,0 +1,13 @@
+diff --git a/Source/Seal.spoon/seal_useractions.lua b/Source/Seal.spoon/seal_useractions.lua
+index ab7e08f..81ab98a 100644
+--- a/Source/Seal.spoon/seal_useractions.lua
++++ b/Source/Seal.spoon/seal_useractions.lua
+@@ -176,7 +176,7 @@ function obj.bareActions(query)
+ end
+ 
+ function obj.favIcon(url)
+-   local query=string.format("http://www.google.com/s2/favicons?domain_url=%s", hs.http.encodeForQuery(url))
++   local query=string.format("http://www.google.com/s2/favicons?sz=64&domain_url=%s", hs.http.encodeForQuery(url))
+    return hs.image.imageFromURL(query)
+ end
+ 
