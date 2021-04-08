@@ -88,7 +88,12 @@ Mute automatically when the computer wakes up.
 
 Configurable in the `config.lua`.
 ```
-config.audio.forceInputDevice = 'MacBook Pro Microphone'
+config.audio.forceInputDevices = {
+  {
+    from = 'Anker SoundCore',
+    to = 'MacBook Pro Microphone',
+  }
+}
 config.audio.muteOnAwake = true
 ```
 
@@ -127,24 +132,20 @@ and is configurable in the `config.lua`.
 config.Seal.key = 'SOME-KEY'
 ```
 
-Usage: Type `tr` following the langcode to which you want to translate the text, and the text to be translate
+The Usage: Type `tr` following the langcode to which you want to translate the text, 
+and the text to be translate
 ```
 tr [to] [text to translate]
 ```
 
 ![gtranslate](./docs/gtranslate.png)
 
-
-### Small improvements on Seal plugins
-
-A [Pull-Request](https://github.com/Hammerspoon/Spoons/pull/221) is open to make 
-some improvements in some plugins, check the [patch](./patches/seal-pr-221.patch) 
-for more details.
-
 ## Update spoons
 
 Run the script `update-spoons.sh`.
 
 This will clone the [Spoons](https://github.com/Hammerspoon/Spoons) repo into a 
-temporary folder, apply the patches and copy the result into the `Spoons` folder.
+temporary folder, apply [the patches](./patches/) and copy the result into the 
+`Spoons` folder.
+
 All the un-used Spoons are ignored in the `.gitignore`.
