@@ -31,6 +31,7 @@ spoon.Seal:loadPlugins({
   'dateconvert',
   'gtranslate',
 })
+spoon.Seal.chooser:width(45)
 spoon.Seal.chooser:placeholderText(config.Seal.placeholder)
 spoon.Seal.chooser:searchSubText(true)
 spoon.Seal.plugins.useractions.actions = config.Seal.useractions
@@ -53,7 +54,7 @@ for key, app in pairs(config.applications) do
 end
 
 
--- Helper to return up to three monitors.
+-- Return a string containing the connected screens.
 function getScreens()
   local screens = {}
   hs.fnutils.each(hs.screen.allScreens(), function (item)

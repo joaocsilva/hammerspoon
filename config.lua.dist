@@ -30,8 +30,13 @@ config.menu.caffeine = {
 Audio configuration.
 ]]--
 config.audio = {}
--- Force specific input device to be always used.
-config.audio.forceInputDevice = 'MacBook Pro Microphone'
+-- React and force input device based on the connected device.
+config.audio.forceInputDevices = {
+  {
+    from = 'Anker SoundCore',
+    to = 'MacBook Pro Microphone',
+  },
+}
 -- Set to true to make the volume muted when the computer wakes up.
 config.audio.muteOnAwake = true
 
@@ -67,33 +72,29 @@ config.Seal.useractions = {
   -- Simple website aliases.
   ['Hammerspoon docs'] = {
     url = 'http://hammerspoon.org/docs/',
-    description = 'Open website http://hammerspoon.org/docs/',
-    icon = 'favicon',
+    description = 'http://hammerspoon.org/docs/',
+    icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=hammerspoon.org'),
   },
   ['Spotify'] = {
     url = 'https://open.spotify.com/',
-    description = 'Open website https://open.spotify.com/',
+    description = 'https://open.spotify.com/',
     icon = 'favicon',
   },
   ['WhatsApp'] = {
     url = 'https://web.whatsapp.com/',
-    description = 'Open website https://web.whatsapp.com/',
+    description = 'https://web.whatsapp.com/',
     icon = 'favicon',
   },
   ['Messenger'] = {
     url = 'https://www.messenger.com/',
-    description = 'Open website https://www.messenger.com/',
+    description = 'https://www.messenger.com/',
     icon = 'favicon',
   },
   -- Websites that use query.
   ['Google search'] = {
     url = 'http://goo.gl/search/${query}',
     description = 'Open in Google search website.',
-    keyword = 'gg', icon = 'favicon',
-  },
-  ['Google translate'] = {
-    url = 'https://translate.google.com/?sl=auto&tl=auto&op=translate&text=${query}',
-    description = 'Open in Google translate website.',
-    keyword = 'tr', icon = 'favicon',
+    keyword = 'gg',
+    icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=google.com'),
   },
 }

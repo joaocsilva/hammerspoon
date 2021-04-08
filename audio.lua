@@ -8,14 +8,18 @@ function audioWatcherCallback(state)
     ]]--
     if state == 'dIn ' then
         local currentName = hs.audiodevice.defaultInputDevice():name()
-        if currentName ~= config.audio.forceInputDevice then
-            if hs.audiodevice.findInputByName(config.audio.forceInputDevice):setDefaultInputDevice() then
-                print('-- Force input device: '.. currentName ..' -> ' .. config.audio.forceInputDevice)
+        for _,device in pairs(config.audio.forceInputDevices) do
+            if device.from == currentName and currentName ~= device.to then
+                if hs.audiodevice.findInputByName(device.to):setDefaultInputDevice() then
+                    print('-- Audio: device changed: ' .. currentName .. ' -> ' .. device.to)
+                else
+                    print('-- Audio: fail to change: ' .. currentName .. ' -> ' .. device.to)
+                end
             end
         end
     end
 end
-if config.audio.forceInputDevice ~= '' then
+if config.audio.forceInputDevice ~= '' or config.audio.forceInputDevices ~= nill then
     hs.audiodevice.watcher.setCallback(audioWatcherCallback)
     hs.audiodevice.watcher.start()
     print('-- Watcher started: Force input device')
