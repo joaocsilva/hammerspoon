@@ -2,10 +2,11 @@ local obj = {}
 obj.__index = obj
 obj.__basename = "gtranslate"
 obj.__name = "seal_" .. obj.__basename
-obj.icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=translate.google.com')
+obj.icon = spoon.Seal.plugins.useractions.favIcon('translate.google.com')
 obj.api = 'https://translation.googleapis.com/language/translate/v2'
-obj.timer_default = spoon.Seal.queryChangedTimerDuration
-obj.timer_changed = false
+obj.url = 'https://translate.google.com/?sl=auto&op=translate&tl=%s&text=%s'
+obj.timerDefault = spoon.Seal.queryChangedTimerDuration
+obj.timerChanged = false
 
 --- Seal.plugins.gtranslate.key
 --- Variable
@@ -19,7 +20,6 @@ end
 
 function obj:bare()
     if obj.key == '' then
-        print('-- gtranslate : Missing key!')
         return false
     end
     return self.bareTranslate
@@ -27,21 +27,32 @@ end
 
 function resetTimer()
     -- Set back the original time.
-    if obj.timer_changed then
-        spoon.Seal.queryChangedTimerDuration = obj.timer_default
-        print('gtanslate queryChangedTimerDuration changed to default ' .. obj.timer_default)
+    if obj.timerChanged then
+        spoon.Seal.queryChangedTimerDuration = obj.timerDefault
+        obj.timerChanged = false
     end
 end
 
 function obj.bareTranslate(query)
     local choices = {}
-    if tostring(query):find('^%s*$') ~= nil then
+    query = tostring(query)
+
+    if query:find('^%s*$') ~= nil or query:find('^tr.*$') == nil then
         resetTimer()
         return choices
     end
 
-    local lang, text = query:match('^tr (%a%a) (.*)$')
-    if not lang or not text then
+    -- Default choice feedback when at least 'tr' is provided.
+    choices[1] = {
+        text = 'Translate',
+        subText = 'Type "tr [lang] [text]"',
+        image = obj.icon,
+        plugin = obj.__name,
+    }
+
+    -- If no language is provided.
+    local lang = query:match('^tr (%a%a).*$')
+    if not lang then
         resetTimer()
         return choices
     end
@@ -49,24 +60,23 @@ function obj.bareTranslate(query)
     langs = languages()
     if langs[lang:lower()] == nil then
         resetTimer()
+        choices[1].text = 'Language not found.'
+        return choices
+    end
+
+    -- Language is present, give a better feedback.
+    choices[1].text = 'Translate to ' .. langs[lang:lower()]
+    choices[1].subText = 'Type "tr ' .. lang:lower() .. ' [text]"'
+
+    lang, text = query:match('^tr (%a%a) (.*)$')
+    if not lang or not text or tostring(text):find('^%s*$') ~= nil then
+        resetTimer()
         return choices
     end
 
     -- Temporary increase the query reaction time.
-    print('gtanslate queryChangedTimerDuration changed to 1')
     spoon.Seal.queryChangedTimerDuration = 1
-    obj.timer_changed = true
-
-    -- If still empty give some feedback.
-    if tostring(text):find('^%s*$') ~= nil then
-        choices[1] = {
-            text = 'Translating to ' .. langs[lang:lower()],
-            subText = 'Type your search',
-            image = obj.icon,
-            plugin = obj.__name,
-        }
-        return choices
-    end
+    obj.timerChanged = true
 
     local q = hs.http.encodeForQuery(text)
     local payload = 'key=' .. obj.key .. '&q=' .. q .. '&target=' .. lang
@@ -83,14 +93,10 @@ function obj.bareTranslate(query)
             end
         end
 
-        local choice = {}
-        choice['text'] = result
-        choice['subText'] = langs[lang:lower():lower()] .. ' translation for "' .. text .. '"'
-        choice['url'] = 'https://translate.google.com/?sl=auto&op=translate&tl=' .. lang .. '&text=' .. q
-        choice['image'] = obj.icon
-        choice['plugin'] = obj.__name
-        choice['type'] = 'openURL'
-        choices[#choices + 1] = choice
+        choices[1].text = result
+        choices[1].subText = langs[lang:lower()] .. ' translation for "' .. text .. '"'
+        choices[1].url = string.format(obj.url, lang, q)
+        choices[1].type = 'openURL'
     end
     return choices
 end
