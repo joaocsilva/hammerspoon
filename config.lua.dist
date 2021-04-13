@@ -8,7 +8,7 @@ config.reload = true
 --[[
 The base keys (hyper).
 ]]--
-config.hyper = {'ctrl', 'alt', 'cmd'}
+config.hyper = { 'ctrl', 'alt', 'cmd' }
 
 --[[
 Menu configuration.
@@ -20,22 +20,22 @@ config.menu.icon = '⌬'
 config.menu.extended = false
 -- Set the timers for the caffeine.
 config.menu.caffeine = {
-  {title = '10 minutes', seconds = 600},
-  {title = '30 minutes', seconds = 1800},
-  {title = '1 hour', seconds = 3600},
-  {title = '3 hours', seconds = 10800},
+    { title = '10 minutes', seconds = 600 },
+    { title = '30 minutes', seconds = 1800 },
+    { title = '1 hour', seconds = 3600 },
+    { title = '3 hours', seconds = 10800 },
 }
 
 --[[
 Audio configuration.
 ]]--
 config.audio = {}
--- React and force input device based on the connected device.
+-- React and force input devices based on the connected device.
 config.audio.forceInputDevices = {
-  {
-    from = 'Anker SoundCore',
-    to = 'MacBook Pro Microphone',
-  },
+    {
+        from = 'Anker SoundCore',
+        to = 'MacBook Pro Microphone',
+    },
 }
 -- Set to true to make the volume muted when the computer wakes up.
 config.audio.muteOnAwake = true
@@ -53,9 +53,9 @@ config.battery.state = true
 Define applications shortcut.
 --]]
 config.applications = {
-  I = 'iTerm',
-  P = 'PhpStorm',
-  L = 'Sublime Text',
+    I = 'iTerm',
+    P = 'PhpStorm',
+    L = 'Sublime Text',
 }
 
 --[[
@@ -65,36 +65,36 @@ config.HoldToQuit = {}
 config.HoldToQuit.duration = 0.3
 
 config.Seal = {}
-config.Seal.hotkey = {config.hyper, 'space'}
+config.Seal.hotkey = { config.hyper, 'space' }
 config.Seal.placeholder = 'Search'
-config.Seal.key = ''
+config.Seal.key = 'AIzaSyCkKkv3FRkUyhA_e1qy7jkH--C4PT6VCHQ'
 config.Seal.useractions = {
-  -- Simple website aliases.
-  ['Hammerspoon docs'] = {
-    url = 'http://hammerspoon.org/docs/',
-    description = 'http://hammerspoon.org/docs/',
-    icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=hammerspoon.org'),
-  },
-  ['Spotify'] = {
-    url = 'https://open.spotify.com/',
-    description = 'https://open.spotify.com/',
-    icon = 'favicon',
-  },
-  ['WhatsApp'] = {
-    url = 'https://web.whatsapp.com/',
-    description = 'https://web.whatsapp.com/',
-    icon = 'favicon',
-  },
-  ['Messenger'] = {
-    url = 'https://www.messenger.com/',
-    description = 'https://www.messenger.com/',
-    icon = 'favicon',
-  },
-  -- Websites that use query.
-  ['Google search'] = {
-    url = 'http://goo.gl/search/${query}',
-    description = 'Open in Google search website.',
-    keyword = 'gg',
-    icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=google.com'),
-  },
+    -- Simple website aliases.
+    ['Hammerspoon docs'] = {
+        url = 'http://hammerspoon.org/docs/',
+        description = 'http://hammerspoon.org/docs/',
+        icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=hammerspoon.org'),
+    },
+    ['Spotify'] = {
+        url = 'https://open.spotify.com/',
+        description = 'https://open.spotify.com/',
+        icon = 'favicon',
+    },
+    ['WhatsApp'] = {
+        url = 'https://web.whatsapp.com/',
+        description = 'https://web.whatsapp.com/',
+        icon = 'favicon',
+    },
+    ['Messenger'] = {
+        url = 'https://www.messenger.com/',
+        description = 'https://www.messenger.com/',
+        icon = 'favicon',
+    },
+    -- Websites that use query.
+    ['Google search'] = {
+        url = 'http://goo.gl/search/${query}',
+        description = 'Open in Google search website.',
+        keyword = 'gg',
+        icon = hs.image.imageFromURL('https://www.google.com/s2/favicons?sz=64&domain_url=google.com'),
+    },
 }

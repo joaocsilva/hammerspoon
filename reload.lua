@@ -10,7 +10,7 @@ function reloadWatcherCallback(files)
         files = {}
         reload = true
     end
-    for _,file in pairs(files) do
+    for _, file in pairs(files) do
         if file:sub(-4) == '.lua' then
             reload = true
         end
@@ -21,6 +21,6 @@ function reloadWatcherCallback(files)
 end
 
 if config.reload then
-    reloadWatcher = hs.pathwatcher.new(hs.configdir, reloadWatcherCallback):start()
-    print('-- Watcher started: Reload')
+    pathWatcher = hs.pathwatcher.new(hs.configdir, reloadWatcherCallback):start()
+    log({ 'Watcher started: Reload.' })
 end

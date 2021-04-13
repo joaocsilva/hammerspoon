@@ -8,21 +8,22 @@ function audioWatcherCallback(state)
     ]]--
     if state == 'dIn ' then
         local currentName = hs.audiodevice.defaultInputDevice():name()
-        for _,device in pairs(config.audio.forceInputDevices) do
+        for _, device in pairs(config.audio.forceInputDevices) do
             if device.from == currentName and currentName ~= device.to then
                 if hs.audiodevice.findInputByName(device.to):setDefaultInputDevice() then
-                    print('-- Audio: device changed: ' .. currentName .. ' -> ' .. device.to)
+                    log({ 'Audio: device changed: ' .. currentName .. ' -> ' .. device.to .. '.' })
                 else
-                    print('-- Audio: fail to change: ' .. currentName .. ' -> ' .. device.to)
+                    log({ 'Audio: fail to change: ' .. currentName .. ' -> ' .. device.to .. '.' })
                 end
             end
         end
     end
 end
-if config.audio.forceInputDevice ~= '' or config.audio.forceInputDevices ~= nill then
+-- Start the watcher if any config is provided.
+if config.audio.forceInputDevices ~= '' or config.audio.forceInputDevices ~= nil then
     hs.audiodevice.watcher.setCallback(audioWatcherCallback)
     hs.audiodevice.watcher.start()
-    print('-- Watcher started: Force input device')
+    log({ 'Watcher started: Force input device.' })
     audioWatcherCallback('dIn ')
 end
 
@@ -31,11 +32,12 @@ end
 function muteWatcherCallback(event)
     if (event == hs.caffeinate.watcher.systemDidWake) then
         local output = hs.audiodevice.defaultOutputDevice()
-        print('-- Mute on awake: Device muted')
         output:setMuted(true)
+        log({ 'Mute on awake: Device muted.' })
     end
 end
+-- Start the watcher if any config is provided.
 if config.audio.muteOnAwake then
-    hs.caffeinate.watcher.new(muteWatcherCallback):start()
-    print('-- Watcher started: Mute on awake')
+    caffeinateWatcher = hs.caffeinate.watcher.new(muteWatcherCallback):start()
+    log({ 'Watcher started: Mute on awake.' })
 end

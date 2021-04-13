@@ -7,6 +7,6 @@
 !/Spoons/HoldToQuit.spoon/
 !/Spoons/Seal.spoon/
 
-config.lua
-
-pasteboard_history.json
+/config.lua
+/console.log
+/pasteboard_history.json
