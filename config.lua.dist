@@ -67,7 +67,7 @@ config.HoldToQuit.duration = 0.3
 config.Seal = {}
 config.Seal.hotkey = { config.hyper, 'space' }
 config.Seal.placeholder = 'Search'
-config.Seal.key = 'AIzaSyCkKkv3FRkUyhA_e1qy7jkH--C4PT6VCHQ'
+config.Seal.key = ''
 config.Seal.useractions = {
     -- Simple website aliases.
     ['Hammerspoon docs'] = {
