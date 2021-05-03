@@ -148,4 +148,34 @@ local menu = hs.menubar.new()
     return menu
 end)
 
+--[[
+- sound
+MacBook Pro Microphone
+MacBook Pro Speakers
+Anker SoundCore
+- screens
+Built-in Retina Display
+ZOWIE XL LCD
+TV
+]]--
+-- Force given output device to be always used.
+--screenWatcher = hs.screen.watcher.newWithActiveScreen(function(event)
+--    if event then
+--        local sc = hs.screen.mainScreen():name()
+--        print('Current: ' .. sc)
+--        -- Set the output to 'Anker SoundCore' if new screen is 'ZOWIE XL LCD'.
+--        if sc == 'ZOWIE XL LCD' then
+--            if hs.audiodevice.findOutputByName('Anker SoundCore'):setDefaultOutputDevice() then
+--                log({ 'Audio: output set to Anker SoundCore.' })
+--            end
+--            -- Set the output to 'MacBook Pro Speakers' if new screen is 'Built-in Retina Display'.
+--        elseif sc == 'Built-in Retina Display' then
+--            if hs.audiodevice.findOutputByName('MacBook Pro Speakers'):setDefaultOutputDevice() then
+--                log({ 'Audio: output set to MacBook Pro Speakers.' })
+--            end
+--        end
+--    end
+--end):start()
+--log({ 'Watcher started: Screen.' })
+
 log({ 'init.lua loaded.' })

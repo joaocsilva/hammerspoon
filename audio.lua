@@ -20,7 +20,7 @@ function audioWatcherCallback(state)
     end
 end
 -- Start the watcher if any config is provided.
-if config.audio.forceInputDevices ~= '' or config.audio.forceInputDevices ~= nil then
+if config.audio.forceInputDevices and config.audio.forceInputDevices ~= '' or config.audio.forceInputDevices ~= nil then
     hs.audiodevice.watcher.setCallback(audioWatcherCallback)
     hs.audiodevice.watcher.start()
     log({ 'Watcher started: Force input device.' })
